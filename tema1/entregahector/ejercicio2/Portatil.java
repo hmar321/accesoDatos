@@ -14,7 +14,7 @@ public class Portatil extends Ordenador{
     }
     @Override
     public String toString() {
-        return "Portátil [Peso=" + dPeso + "] "+super.toString();
+        return super.toString()+"Portátil [Peso=" + dPeso + "]";
     }
     
 }

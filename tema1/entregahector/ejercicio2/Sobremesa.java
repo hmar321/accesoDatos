@@ -15,7 +15,7 @@ public class Sobremesa extends Ordenador{
 
     @Override
     public String toString() {
-        return "Sobremesa [sDesTorre=" + sDesTorre + "] "+super.toString();
+        return super.toString()+"Sobremesa [sDesTorre=" + sDesTorre + "]";
     }
     
 }

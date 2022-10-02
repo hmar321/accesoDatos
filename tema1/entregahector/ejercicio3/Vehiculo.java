@@ -1,22 +1,16 @@
 package main.entregahector.ejercicio3;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 
-/*Escribe una clase Vehiculo que tenga como atributos la matrícula y fecha inicio
-y fecha fin del estacionamiento.
-Constructor con la matrícula y los getters y setters de los 3 atributos y toString() 
- */
 public class Vehiculo {
     /* atributos */
     private String sMatricula;
-    private LocalTime dFechaIni;
-    private LocalTime dFechaFin;
+    private LocalDateTime dFechaIni;
+    private LocalDateTime dFechaFin;
 
     /* constructor */
-    public Vehiculo(String sMatricula, LocalTime dFechaIni, LocalTime dFechaFin) {
+    public Vehiculo(String sMatricula) {
         this.sMatricula = sMatricula;
-        this.dFechaIni = dFechaIni;
-        this.dFechaFin = dFechaFin;
     }
 
     /* metodos */
@@ -28,20 +22,25 @@ public class Vehiculo {
         this.sMatricula = sMatricula;
     }
 
-    public LocalTime getdFechaIni() {
+    public LocalDateTime getdFechaIni() {
         return dFechaIni;
     }
 
-    public void setdFechaIni(LocalTime dFechaIni) {
+    public void setdFechaIni(LocalDateTime dFechaIni) {
         this.dFechaIni = dFechaIni;
     }
 
-    public LocalTime getdFechaFin() {
+    public LocalDateTime getdFechaFin() {
         return dFechaFin;
     }
 
-    public void setdFechaFin(LocalTime dFechaFin) {
+    public void setdFechaFin(LocalDateTime dFechaFin) {
         this.dFechaFin = dFechaFin;
+    }
+
+    @Override
+    public String toString() {
+        return "Vehiculo [Matrícula=" + sMatricula + ", FechaInicio=" + dFechaIni + ", FechaFin=" + dFechaFin + "]";
     }
 
 }

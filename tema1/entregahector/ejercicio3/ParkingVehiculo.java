@@ -1,7 +1,8 @@
 package main.entregahector.ejercicio3;
 
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 
 public class ParkingVehiculo implements Parking {
     /* constantes */
@@ -10,14 +11,55 @@ public class ParkingVehiculo implements Parking {
     /* atributos */
     private int iPlazasOcupadas;
     private String sDireccionParking;
+    private ArrayList<Vehiculo> alListaVehiculos = new ArrayList<Vehiculo>();;
 
     /* constructor */
-    public ParkingVehiculo(int iPlazasOcupadas, String sDireccionParking) {
-        this.iPlazasOcupadas = iPlazasOcupadas;
+    public ParkingVehiculo(String sDireccionParking) {
+        this.iPlazasOcupadas = 0;
         this.sDireccionParking = sDireccionParking;
     }
 
     /* metodos */
+    @Override
+    public boolean hayPlaza() {
+        return (PLAZAS > iPlazasOcupadas) ? true : false;
+    }
+
+    @Override
+    public void aparcaCoche(Vehiculo paramVehiculo) throws Exception {
+        if (!hayPlaza()) {
+            throw new Exception("Todas las plazas están ocupadas.");
+        }
+        if (alListaVehiculos.contains(paramVehiculo)) {
+            throw new Exception("Este vehículo ya se encuentra en el parking.");
+        }
+        // asignamos fecha ini al vehiculo
+        paramVehiculo.setdFechaIni(LocalDateTime.now());
+        // guardamos el vehiculo
+        alListaVehiculos.add(paramVehiculo);
+        // ocupamos 1 plaza
+        this.iPlazasOcupadas++;
+    }
+
+    @Override
+    public void sacaCoche(Vehiculo paramVehiculo) throws Exception {
+        if (!alListaVehiculos.contains(paramVehiculo)) {
+            throw new Exception("Este vehículo no se encuentra en el parking.");
+        }
+        // asignamos fecha fin al vehiculo
+        paramVehiculo.setdFechaFin(LocalDateTime.now());
+        // quitamos el vehiculo
+        alListaVehiculos.remove(paramVehiculo);
+        // desocupamos 1 plaza
+        this.iPlazasOcupadas--;
+    }
+
+    @Override
+    public double getFactura(Vehiculo paramVehiculo) {
+        return (paramVehiculo.getdFechaIni().until(paramVehiculo.getdFechaFin(), ChronoUnit.MINUTES)) * PRECIO_MIN;
+
+    }
+
     public int getiPlazasOcupadas() {
         return iPlazasOcupadas;
     }
@@ -32,30 +74,6 @@ public class ParkingVehiculo implements Parking {
 
     public void setsDireccionParking(String sDireccionParking) {
         this.sDireccionParking = sDireccionParking;
-    }
-
-    @Override
-    public boolean hayPlaza() {
-        return (PLAZAS > iPlazasOcupadas) ? true : false;
-    }
-
-    @Override
-    public void aparcaCoche(Vehiculo paramVehiculo) {
-        //ocupamos 1 plaza
-        this.iPlazasOcupadas+=1;
-        //asignamos fecha ini y fecha fin a vehiculo
-        paramVehiculo.setdFechaIni(LocalTime.now());
-        paramVehiculo.setdFechaFin(LocalTime.now().plus(2,ChronoUnit.HOURS));
-    }
-
-    @Override
-    public void sacaCoche() {
-
-    }
-
-    @Override
-    public void getFactura() {
-
     }
 
 }

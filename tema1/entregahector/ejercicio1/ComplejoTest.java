@@ -1,7 +1,5 @@
 package main.entregahector.ejercicio1;
 
-import java.text.DecimalFormat;
-
 public class ComplejoTest {
     public static void main(String[] args) {
         //crear c1
